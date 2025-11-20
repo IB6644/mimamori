@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>はせがわ見守りプラットフォーム - デモ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .info-panel {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .logo-icon {
+            font-size: 48px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #aa0000;
+        }
+        
+        .info-panel h1 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        
+        .info-panel p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        
+        .features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+        
+        .features li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            color: #444;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .features li:last-child {
+            border-bottom: none;
+        }
+        
+        .features li::before {
+            content: '✓';
+            color: #4CAF50;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .tech-stack {
+            background: #f5f5f5;
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        
+        .tech-stack h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tech-tag {
+            background: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #555;
+            border: 1px solid #ddd;
+        }
+        
+        .phone-mockup {
+            position: relative;
+            width: 375px;
+            height: 812px;
+            background: #000;
+            border-radius: 50px;
+            padding: 12px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .phone-screen {
+            flex: 1;
+            background: white;
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .phone-screen iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .controls {
+            position: absolute;
+            bottom: -60px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .control-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .control-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        .status-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .phone-mockup {
+                transform: scale(0.8);
+                margin-bottom: 40px;
+            }
+            
+            .info-panel {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="info-panel">
+            <div class="logo">
+                <span class="logo-icon">🏠</span>
+                <span class="logo-text">はせがわ</span>
+            </div>
+            
+            <h1>見守りプラットフォーム</h1>
+            <p>NILM技術による認知症早期検出と生活見守りサービスのプロトタイプデモ</p>
+            
+            <ul class="features">
+                <li>朝の3動作スコア自動算出</li>
+                <li>認知症兆候の早期検出</li>
+                <li>5つの優先家電リアルタイム監視</li>
+                <li>24時間活動パターン分析</li>
+                <li>インテリジェントアラート通知</li>
+                <li>週次生活リズムレポート</li>
+            </ul>
+            
+            <div class="tech-stack">
+                <h3>技術スタック</h3>
+                <div class="tech-tags">
+                    <span class="tech-tag">Flutter 3.35.4</span>
+                    <span class="tech-tag">Dart 3.9.2</span>
+                    <span class="tech-tag">Provider</span>
+                    <span class="tech-tag">FL Chart</span>
+                    <span class="tech-tag">Material Design 3</span>
+                    <span class="tech-tag">NILM技術</span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 24px; padding: 16px; background: #fff3cd; border-radius: 12px; border-left: 4px solid #aa0000;">
+                <p style="margin: 0; font-size: 14px; color: #856404;">
+                    <strong>💡 操作方法：</strong><br>
+                    右のスマホ画面で実際に操作できます。下部ナビゲーションで画面を切り替え、カードをタップして詳細を確認できます。
+                </p>
+            </div>
+        </div>
+        
+        <div style="position: relative;">
+            <div class="phone-mockup">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    LIVE DEMO
+                </div>
+                <div class="phone-screen">
+                    <iframe src="index.html" title="はせがわ見守りプラットフォーム"></iframe>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="control-btn" onclick="reloadApp()">🔄 リロード</button>
+                <button class="control-btn" onclick="openFullscreen()">🖥️ フルスクリーン</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        © 2025 大崎電気工業株式会社 × 株式会社はせがわ | PoC Prototype
+    </div>
+    
+    <script>
+        function reloadApp() {
+            const iframe = document.querySelector('iframe');
+            iframe.src = iframe.src;
+        }
+        
+        function openFullscreen() {
+            window.open('index.html', '_blank');
+        }
+        
+        // キーボードショートカット
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'r' && e.ctrlKey) {
+                e.preventDefault();
+                reloadApp();
+            }
+            if (e.key === 'f' && e.ctrlKey) {
+                e.preventDefault();
+                openFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>

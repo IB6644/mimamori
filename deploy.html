@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>デプロイガイド - はせがわ見守りプラットフォーム</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #aa0000 0%, #880000 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section h2 {
+            color: #aa0000;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .section h3 {
+            color: #333;
+            margin: 20px 0 10px 0;
+            font-size: 18px;
+        }
+        
+        .method-card {
+            background: #f9f9f9;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #aa0000;
+        }
+        
+        .method-card h3 {
+            margin-top: 0;
+        }
+        
+        .steps {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+        
+        .steps li {
+            counter-increment: step-counter;
+            margin: 15px 0;
+            padding-left: 40px;
+            position: relative;
+        }
+        
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #aa0000;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .button {
+            display: inline-block;
+            background: #aa0000;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 10px 10px 10px 0;
+            transition: all 0.3s;
+        }
+        
+        .button:hover {
+            background: #880000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(170, 0, 0, 0.3);
+        }
+        
+        .button-secondary {
+            background: #666;
+        }
+        
+        .button-secondary:hover {
+            background: #555;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        
+        .alert-info {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            color: #1565c0;
+        }
+        
+        .alert-warning {
+            background: #fff3cd;
+            border-left: 4px solid #ff9800;
+            color: #856404;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            border-left: 4px solid #4caf50;
+            color: #155724;
+        }
+        
+        .checklist {
+            list-style: none;
+        }
+        
+        .checklist li {
+            padding: 8px 0;
+        }
+        
+        .checklist li::before {
+            content: '☐ ';
+            color: #aa0000;
+            font-size: 18px;
+            margin-right: 8px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 デプロイガイド</h1>
+        <p>はせがわ見守りプラットフォームを公開する方法</p>
+    </div>
+    
+    <div class="container">
+        <div class="section">
+            <h2>📦 ダウンロード済みファイル</h2>
+            <p>このフォルダには、すぐにデプロイ可能な全ファイルが含まれています。</p>
+            <div style="margin-top: 20px;">
+                <a href="demo.html" class="button">📱 デモを見る</a>
+                <a href="index.html" class="button button-secondary">🖥️ アプリを開く</a>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>🌐 GitHub Pages（推奨・無料）</h2>
+            
+            <div class="method-card">
+                <h3>方法1: ウェブインターフェース（最も簡単）</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>GitHub でリポジトリを作成</strong><br>
+                        <a href="https://github.com/new" target="_blank">https://github.com/new</a> にアクセス<br>
+                        Repository name: <code>hasegawa-mimamori-demo</code>
+                    </li>
+                    <li>
+                        <strong>ファイルをアップロード</strong><br>
+                        "uploading an existing file" をクリック<br>
+                        このフォルダの全ファイルをドラッグ&ドロップ
+                    </li>
+                    <li>
+                        <strong>GitHub Pages を有効化</strong><br>
+                        Settings → Pages → Source: "main" → Save
+                    </li>
+                    <li>
+                        <strong>公開URLでアクセス</strong><br>
+                        <code>https://your-username.github.io/hasegawa-mimamori-demo/demo.html</code>
+                    </li>
+                </ol>
+            </div>
+            
+            <div class="method-card">
+                <h3>方法2: Git コマンドライン</h3>
+                <div class="code-block">git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/YOUR_USERNAME/REPO_NAME.git
+git branch -M main
+git push -u origin main</div>
+                <p>その後、GitHub ウェブインターフェースで Pages を有効化</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>⚡ Netlify（超高速デプロイ）</h2>
+            <ol class="steps">
+                <li>
+                    <strong>Netlify にログイン</strong><br>
+                    <a href="https://app.netlify.com/" target="_blank">https://app.netlify.com/</a>
+                </li>
+                <li>
+                    <strong>"Add new site" → "Deploy manually"</strong>
+                </li>
+                <li>
+                    <strong>このフォルダをドラッグ&ドロップ</strong><br>
+                    数秒で公開完了！
+                </li>
+            </ol>
+            <div class="alert alert-success">
+                ✅ <strong>Netlifyの利点:</strong> 自動HTTPS、高速CDN、カスタムドメイン無料
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>☁️ Vercel（開発者向け）</h2>
+            <ol class="steps">
+                <li>
+                    <strong>Vercel にログイン</strong><br>
+                    <a href="https://vercel.com/" target="_blank">https://vercel.com/</a>
+                </li>
+                <li>
+                    <strong>"Add New Project"</strong>
+                </li>
+                <li>
+                    <strong>ドラッグ&ドロップまたはGit連携</strong>
+                </li>
+                <li>
+                    <strong>Deploy → 完了！</strong>
+                </li>
+            </ol>
+        </div>
+        
+        <div class="section">
+            <h2>🖥️ ローカルでテスト</h2>
+            <h3>Pythonを使用（最も簡単）</h3>
+            <div class="code-block">python3 -m http.server 8000</div>
+            <p>ブラウザで <code>http://localhost:8000/demo.html</code> を開く</p>
+            
+            <h3>Node.jsを使用</h3>
+            <div class="code-block">npm install -g http-server
+http-server -p 8000</div>
+        </div>
+        
+        <div class="section">
+            <h2>✅ 公開後のチェックリスト</h2>
+            <ul class="checklist">
+                <li>デモページ（demo.html）が正しく表示される</li>
+                <li>スマホフレーム内のアプリが動作する</li>
+                <li>下部ナビゲーションで画面切り替え可能</li>
+                <li>グラフが正しく表示される</li>
+                <li>カードのタップで詳細が表示される</li>
+                <li>リロードボタンが動作する</li>
+                <li>モバイル表示が正常に動作する</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>🔧 トラブルシューティング</h2>
+            
+            <div class="alert alert-warning">
+                <strong>ページが真っ白になる場合:</strong><br>
+                GitHub Pagesの場合、URLに注意してください。<br>
+                正: <code>https://username.github.io/repository-name/demo.html</code><br>
+                誤: <code>https://username.github.io/demo.html</code>
+            </div>
+            
+            <div class="alert alert-info">
+                <strong>ローカルで file:// から開けない場合:</strong><br>
+                セキュリティ制限により、必ずローカルサーバーを使用してください。<br>
+                Python: <code>python3 -m http.server 8000</code>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>📱 推奨URL</h2>
+            <p><strong>プレゼンテーション用:</strong> <code>/demo.html</code> （スマホフレーム付き）</p>
+            <p><strong>フルスクリーン:</strong> <code>/index.html</code> （アプリ本体）</p>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2025 大崎電気工業株式会社 × 株式会社はせがわ</p>
+        <p>PoC Prototype - Developed by 梅澤優一（Ume）</p>
+    </div>
+</body>
+</html>
